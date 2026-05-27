@@ -1969,6 +1969,11 @@ fn test_get_records_by_type_missing_doctor_history_returns_not_found() {
     });
 
     let result = client.try_get_records_by_type(&patient, &patient, &Symbol::new(&env, "VISIT"));
+fn test_get_record_history_missing_record_returns_not_found() {
+    let env = Env::default();
+    let (client, patient, _doctor) = setup_for_filter(&env);
+
+    let result = client.try_get_record_history(&999, &patient);
 
     assert_eq!(result, Err(Ok(ContractError::NotFound)));
 }
